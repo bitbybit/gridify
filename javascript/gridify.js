@@ -75,12 +75,13 @@ Element.prototype.gridify = function (options)
             for (var i= 0, length = items.length; i < length; i++)
             {
                 var idx = indexOfSmallest(columns);
-                items[i].setAttribute('style', 'width: ' + item_width + 'px; ' +
+                items[i].setAttribute('style', 'width: ' + ((parseInt(item_width) > parseInt(items[i].width)) ? items[i].width : item_width) + 'px; ' +
                     'position: absolute; ' +
                     'margin: ' + item_margin/2 + 'px; ' +
                     'top: ' + (columns[idx] + item_margin/2) +'px; ' +
                     'left: ' + ((item_width + item_margin) * idx + left) + 'px; ' +
-                    'transition: ' + transition);
+                    'transition: ' + transition +
+                    ((parseInt(item_width) > parseInt(items[i].width)) ? 'padding: 5px ' + (item_width-items[i].width)/2 + 'px;' : ''));
 
                 columns[idx] += items[i].clientHeight + item_margin;
             }
